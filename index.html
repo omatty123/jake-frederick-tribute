@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jake Frederick — From Fire to History</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root {
+  --charcoal: #111;
+  --deep-black: #0a0a0a;
+  --parchment: #d4c5a9;
+  --parchment-light: #e8dcc6;
+  --ember: #c45d2c;
+  --ember-glow: #e8a838;
+  --burgundy: #6b1d2a;
+  --burgundy-deep: #4a1019;
+  --navy: #1a2744;
+  --smoke: #2a2a2a;
+  --ash: #888;
+  --warm-white: #f0ebe3;
+}
+
+html { scroll-behavior: smooth; scrollbar-color: var(--ember) var(--charcoal); }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--deep-black);
+  color: var(--parchment);
+  line-height: 1.7;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--ember); color: var(--warm-white); }
+
+a { color: var(--ember-glow); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--ember); }
+
+/* ── EMBERS ── */
+.embers-container {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.ember-particle {
+  position: absolute; bottom: -10px;
+  width: 3px; height: 3px; border-radius: 50%;
+  background: var(--ember-glow);
+  box-shadow: 0 0 6px 2px rgba(232,168,56,0.4);
+  animation: float-up linear infinite;
+  opacity: 0;
+}
+@keyframes float-up {
+  0%   { opacity:0; transform: translateY(0) translateX(0) scale(1); }
+  10%  { opacity:0.7; }
+  50%  { opacity:0.4; transform: translateY(-50vh) translateX(25px) scale(0.7); }
+  100% { opacity:0; transform: translateY(-105vh) translateX(-15px) scale(0.2); }
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; width:100%; z-index:100;
+  padding: 14px 40px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(212,197,169,0.06);
+}
+.nav-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ember);
+}
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ash);
+  text-decoration: none; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--ember-glow); }
+
+/* ── HEADER (compact, no waste) ── */
+.header {
+  padding: 80px 8vw 0;
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.header::before {
+  content: '';
+  position: absolute; top:0; left:0; width:100%; height:100%;
+  background:
+    radial-gradient(ellipse at 10% 60%, rgba(196,93,44,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 20%, rgba(26,39,68,0.15) 0%, transparent 50%);
+  pointer-events: none; z-index: -1;
+}
+
+.header-photo {
+  width: 260px; height: 320px;
+  object-fit: cover; object-position: top center;
+  border: 1px solid rgba(212,197,169,0.12);
+  filter: grayscale(0.15) contrast(1.05);
+}
+
+.header-text { padding-top: 8px; }
+
+.header-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 5px;
+  text-transform: uppercase; color: var(--ember);
+  margin-bottom: 12px;
+  opacity: 0; animation: fadeIn 0.6s 0.2s forwards;
+}
+
+.header-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  color: var(--warm-white);
+  margin-bottom: 16px;
+  opacity: 0; animation: fadeIn 0.6s 0.4s forwards;
+}
+
+.header-title-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  color: var(--parchment);
+  opacity: 0; animation: fadeIn 0.6s 0.5s forwards;
+  margin-bottom: 6px;
+}
+
+.header-rule {
+  width: 50px; height: 2px;
+  background: var(--ember);
+  margin: 20px 0;
+  opacity: 0; animation: fadeIn 0.4s 0.6s forwards;
+}
+
+.header-lede {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--parchment-light);
+  max-width: 560px;
+  opacity: 0; animation: fadeIn 0.6s 0.7s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(12px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── SHARED ── */
+section { position: relative; z-index: 2; padding: 8vh 8vw; }
+
+.section-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--ember); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--warm-white); line-height: 1.15;
+  margin-bottom: 36px;
+}
+.section-title .accent { color: var(--ember-glow); }
+
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+.reveal.visible { opacity:1; transform: translateY(0); }
+
+/* ── ORIGIN ── */
+.origin {
+  background: linear-gradient(180deg, var(--deep-black), #0d0805, var(--deep-black));
+  padding-top: 6vh;
+}
+
+.origin-body {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 60px;
+  align-items: start;
+}
+
+.origin-text {
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--parchment-light);
+}
+
+.origin-text p { margin-bottom: 20px; }
+.origin-text .hl { color: var(--ember-glow); font-weight: 500; }
+
+.origin-sidebar {
+  position: sticky; top: 80px;
+}
+
+.timeline-mini {
+  display: flex; flex-direction: column; gap: 0;
+}
+.timeline-mini-item {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 16px; padding: 12px 0;
+  border-top: 1px solid rgba(196,93,44,0.12);
+}
+.timeline-mini-item .yr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--ember); padding-top: 2px;
+}
+.timeline-mini-item .ev {
+  font-size: 0.9rem; color: var(--parchment); opacity: 0.7;
+}
+
+/* ── BOOKS ── */
+.books { background: var(--deep-black); }
+
+.book-shelf {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.book-item {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 0;
+  transition: transform 0.3s;
+}
+.book-item:hover { transform: translateY(-3px); }
+
+.book-spine {
+  background: linear-gradient(180deg, var(--burgundy), var(--burgundy-deep));
+  border-radius: 2px 0 0 2px;
+}
+.book-item:nth-child(2) .book-spine {
+  background: linear-gradient(180deg, var(--navy), #0f1a2e);
+}
+
+.book-body {
+  background: linear-gradient(135deg, #1a1810, #13110d);
+  border: 1px solid rgba(212,197,169,0.08);
+  border-left: none;
+  padding: 32px 28px;
+}
+
+.book-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--ember); margin-bottom: 8px;
+}
+.book-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--warm-white);
+  line-height: 1.25; margin-bottom: 6px;
+}
+.book-title a { color: var(--warm-white); text-decoration: none; border-bottom: 1px solid rgba(196,93,44,0.3); }
+.book-title a:hover { border-bottom-color: var(--ember-glow); color: var(--parchment-light); }
+
+.book-publisher {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ash); margin-bottom: 14px;
+}
+.book-description {
+  font-size: 0.95rem; color: var(--parchment);
+  opacity: 0.7; line-height: 1.75;
+}
+.book-tags { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.book-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1px solid rgba(196,93,44,0.2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ember);
+}
+
+/* ── AWARDS ── */
+.awards {
+  background: linear-gradient(180deg, var(--deep-black), #0a0c14, var(--deep-black));
+}
+.awards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.award-card {
+  padding: 28px 24px;
+  border: 1px solid rgba(212,197,169,0.06);
+  background: rgba(255,255,255,0.008);
+  transition: border-color 0.4s;
+  position: relative;
+}
+.award-card:hover { border-color: rgba(196,93,44,0.25); }
+.award-card::before {
+  content:''; position: absolute; top:0; left:0;
+  width: 32px; height: 2px; background: var(--ember);
+}
+.award-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--ember); margin-bottom: 10px;
+}
+.award-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--warm-white); margin-bottom: 8px; line-height: 1.3;
+}
+.award-desc {
+  font-size: 0.9rem; color: var(--parchment); opacity: 0.6;
+}
+
+/* ── TEACHING ── */
+.teaching { background: var(--deep-black); }
+
+.teaching-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px; align-items: start;
+}
+
+.teaching-text {
+  font-size: 1.05rem; line-height: 1.85;
+  color: var(--parchment-light);
+}
+
+.quote-block {
+  border-left: 3px solid var(--ember);
+  padding: 16px 0 16px 24px;
+  margin: 28px 0;
+}
+.quote-block blockquote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 1.3rem;
+  color: var(--warm-white); line-height: 1.45;
+}
+.quote-block cite {
+  display: block; margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--ash); font-style: normal; text-transform: uppercase;
+}
+
+.courses-list { list-style: none; }
+.courses-list li {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(212,197,169,0.06);
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  gap: 16px; align-items: baseline;
+}
+.course-dot {
+  width: 6px; height: 6px;
+  background: var(--ember); border-radius: 50%; margin-top: 7px;
+}
+.course-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem; color: var(--warm-white);
+}
+
+/* ── RESEARCH ── */
+.research {
+  background: linear-gradient(180deg, var(--deep-black), #120a04, var(--deep-black));
+}
+.research-card {
+  max-width: 640px;
+  background: linear-gradient(145deg, rgba(196,93,44,0.05), rgba(107,29,42,0.05));
+  border: 1px solid rgba(196,93,44,0.12);
+  padding: 40px;
+}
+.research-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--ember); margin-bottom: 14px;
+}
+.research-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--warm-white); line-height: 1.2; margin-bottom: 14px;
+}
+.research-text {
+  font-size: 1rem; color: var(--parchment); opacity: 0.8; line-height: 1.8;
+}
+
+/* ── ASIDE ── */
+.aside-block {
+  padding: 4vh 8vw;
+  background: var(--deep-black); z-index: 2; position: relative;
+}
+.aside-inner {
+  max-width: 480px; margin-left: auto;
+  padding: 28px;
+  border: 1px solid rgba(212,197,169,0.05);
+  background: rgba(255,255,255,0.008);
+}
+.aside-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--ash); margin-bottom: 10px;
+}
+.aside-inner p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 1.05rem;
+  color: var(--parchment-light); line-height: 1.55;
+}
+.aside-footnote {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-style: normal !important;
+  font-size: 0.85rem !important;
+  color: var(--ash) !important;
+  margin-top: 10px;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 6vh 8vw 4vh;
+  background: var(--deep-black);
+  border-top: 1px solid rgba(212,197,169,0.06);
+  z-index: 2; position: relative;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px; align-items: end;
+}
+.footer-left h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--warm-white); line-height: 1.15; margin-bottom: 12px;
+}
+.footer-left p {
+  font-size: 0.95rem; color: var(--parchment); opacity: 0.55;
+  max-width: 440px;
+}
+.footer-contact { text-align: right; }
+.footer-contact a {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 1px;
+  color: var(--parchment); text-decoration: none; margin-bottom: 6px;
+}
+.footer-contact a:hover { color: var(--ember-glow); }
+.footer-contact .location {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; color: var(--ash); margin-top: 10px;
+}
+.footer-bottom {
+  margin-top: 48px; padding-top: 16px;
+  border-top: 1px solid rgba(212,197,169,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-bottom span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 2px;
+  color: var(--ash); text-transform: uppercase; opacity: 0.5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .header { grid-template-columns: 180px 1fr; gap: 28px; padding-top: 70px; }
+  .header-photo { width: 180px; height: 230px; }
+  .origin-body, .book-shelf, .teaching-layout, .footer-grid {
+    grid-template-columns: 1fr; gap: 32px;
+  }
+  .awards-grid { grid-template-columns: 1fr; gap: 16px; }
+  .origin-sidebar { position: static; }
+  .footer-contact { text-align: left; }
+  nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  section { padding: 6vh 5vw; }
+}
+
+@media (max-width: 600px) {
+  .header { grid-template-columns: 1fr; gap: 20px; padding-top: 64px; }
+  .header-photo { width: 140px; height: 180px; }
+}
+</style>
+</head>
+<body>
+
+<div class="embers-container" id="embers"></div>
+
+<nav>
+  <div class="nav-label">Jake Frederick</div>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#books">Works</a></li>
+    <li><a href="#honors">Honors</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#research">Research</a></li>
+  </ul>
+</nav>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <img src="jake.jpeg" alt="Jake Frederick" class="header-photo">
+  <div class="header-text">
+    <div class="header-eyebrow">Tonight's Guest of Honor</div>
+    <h1>Jake Frederick</h1>
+    <div class="header-title-line">Jean Lampert Woy &amp; J. Richard Woy Professor of History</div>
+    <div class="header-title-line"><a href="https://www.lawrence.edu/people/jake-frederick-jean-lampert-woy-and-j-richard-woy-professor-of-history">Lawrence University</a>, Appleton, Wisconsin</div>
+    <div class="header-rule"></div>
+    <p class="header-lede">
+      A scholar whose work moves between tobacco riots, monetary systems, and urban conflagrations in colonial Mexico. Before any of it, he fought wildfire for a living. The archive came second. The fire came first.
+    </p>
+  </div>
+</header>
+
+<!-- ── ORIGIN ── -->
+<section class="origin" id="origin">
+  <div class="section-number reveal">01 &mdash; Origin</div>
+  <h2 class="section-title reveal">From Chiapas to the <span class="accent">Colonial Archive</span></h2>
+
+  <div class="origin-body">
+    <div class="origin-text reveal">
+      <p>
+        Frederick came to history the hard way. Before graduate school, before the Newberry Library, before any of the books, he worked as a wildland firefighter for the <span class="hl">U.S. Forest Service</span>. In 1998, a catastrophic outbreak of forest fires in southern Mexico led to his deployment to <span class="hl">Chiapas</span>, where he trained local crews in containment and suppression.
+      </p>
+      <p>
+        What he encountered there was not only ecological crisis but a set of deeper questions about how states respond to disaster, who bears the cost of catastrophe, and how those patterns recur across centuries. Those questions followed him to Penn State, where he earned his doctorate, and have informed every major project since.
+      </p>
+      <p>
+        His first book investigated how the Totonac communities of Papantla, Veracruz navigated the economic violence of the Bourbon tobacco monopoly. His second traced the entangled monetary foundations of two post-colonial republics. His current research, on firefighting in eighteenth-century Mexico, represents something like a return: the historian circling back to where the questions began.
+      </p>
+    </div>
+
+    <div class="origin-sidebar reveal">
+      <div class="timeline-mini">
+        <div class="timeline-mini-item">
+          <span class="yr">1998</span>
+          <span class="ev">Deployed to Chiapas as USFS firefighter</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">B.A.</span>
+          <span class="ev">UMass Amherst</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">Ph.D.</span>
+          <span class="ev">Pennsylvania State University</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">2006</span>
+          <span class="ev">Joins Lawrence University faculty</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">2016</span>
+          <span class="ev"><em>Riot!</em> published</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">2017</span>
+          <span class="ev"><em>Spanish Dollars</em> published; Award for Excellence in Scholarship</span>
+        </div>
+        <div class="timeline-mini-item">
+          <span class="yr">2025</span>
+          <span class="ev">Named Woy Professor of History</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOKS ── -->
+<section class="books" id="books">
+  <div class="section-number reveal">02 &mdash; Published Works</div>
+  <h2 class="section-title reveal">The <span class="accent">Books</span></h2>
+
+  <div class="book-shelf">
+    <div class="book-item reveal">
+      <div class="book-spine"></div>
+      <div class="book-body">
+        <div class="book-year">2016 &nbsp;&bull;&nbsp; Sussex Academic Press</div>
+        <h3 class="book-title">
+          <a href="https://books.google.com/books?id=EXBHvgAACAAJ" target="_blank" rel="noopener">Riot! Tobacco, Reform, and Violence in Eighteenth-Century Papantla, Mexico</a>
+        </h3>
+        <div class="book-publisher">ISBN 9781845198169</div>
+        <p class="book-description">
+          An examination of four uprisings in Papantla, Veracruz between 1736 and 1787. The Bourbon monopolization of tobacco in 1764 destabilized an already fragile colonial arrangement, and Frederick reconstructs how the Totonac community responded: through petition, negotiation, and, when those failed, organized violence. The book's central argument is that colonial rule in Papantla was constituted through ongoing negotiation, not imposed from above.
+        </p>
+        <div class="book-tags">
+          <span class="book-tag">Colonial Mexico</span>
+          <span class="book-tag">Indigenous Agency</span>
+          <span class="book-tag">Economic Violence</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-item reveal">
+      <div class="book-spine"></div>
+      <div class="book-body">
+        <div class="book-year">2017 &nbsp;&bull;&nbsp; Rowman &amp; Littlefield</div>
+        <h3 class="book-title">
+          <a href="https://books.google.com/books/about/Spanish_Dollars_and_Sister_Republics.html?id=1lzCDQAAQBAJ" target="_blank" rel="noopener">Spanish Dollars and Sister Republics: The Money That Made Mexico and the United States</a>
+        </h3>
+        <div class="book-publisher">With Tatiana Seijas &nbsp;&bull;&nbsp; ISBN 9781538100462</div>
+        <p class="book-description">
+          Both Mexico and the United States adopted the Spanish piece of eight as their monetary foundation. Seijas and Frederick follow that shared inheritance from the 1770s through the 1860s, tracing how each republic designed coinage to express national ideals, struggled to establish monetary legitimacy, and confronted the material realities of building an economy from colonial remnants.
+        </p>
+        <div class="book-tags">
+          <span class="book-tag">Economic History</span>
+          <span class="book-tag">Numismatics</span>
+          <span class="book-tag">Comparative Americas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AWARDS ── -->
+<section class="awards" id="honors">
+  <div class="section-number reveal">03 &mdash; Recognition</div>
+  <h2 class="section-title reveal">Honors &amp; <span class="accent">Fellowships</span></h2>
+
+  <div class="awards-grid">
+    <div class="award-card reveal">
+      <div class="award-year">2025&ndash;26</div>
+      <h3 class="award-name">Woy Professorship in History</h3>
+      <p class="award-desc">Endowed chair established by Jean Lampert Woy '65 and J. Richard Woy '64 at Lawrence University.</p>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-year">2017</div>
+      <h3 class="award-name">Award for Excellence in Scholarship</h3>
+      <p class="award-desc">Lawrence University's recognition for sustained scholarly contribution.</p>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-year">Fellow</div>
+      <h3 class="award-name">Newberry Library Fellowship</h3>
+      <p class="award-desc">ACM fellowship supporting "Fire and Control in Bourbon Mexico."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEACHING ── -->
+<section class="teaching" id="teaching">
+  <div class="section-number reveal">04 &mdash; In the Classroom</div>
+  <h2 class="section-title reveal">Courses &amp; <span class="accent">Pedagogy</span></h2>
+
+  <div class="teaching-layout">
+    <div class="reveal">
+      <p class="teaching-text">
+        Frederick is, by his own description, "a fairly demanding professor." His seminars tend to favor primary sources over textbook summaries, and he structures discussion around the assumption that students are capable of more rigorous analysis than they've been asked to produce. The courses below reflect his core preoccupations: the exercise and collapse of imperial power, the construction of racial categories under colonialism, and the way catastrophic events expose the fault lines of the societies they strike.
+      </p>
+
+      <div class="quote-block">
+        <blockquote>"You all volunteered for this, to learn ideas you don't have."</blockquote>
+        <cite>Jake Frederick</cite>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <ul class="courses-list">
+        <li>
+          <div class="course-dot"></div>
+          <div class="course-name">The Rise and Fall of American Empires</div>
+        </li>
+        <li>
+          <div class="course-dot"></div>
+          <div class="course-name">Race and Ethnicity in Latin America</div>
+        </li>
+        <li>
+          <div class="course-dot"></div>
+          <div class="course-name">Disasters that Changed the Americas</div>
+        </li>
+        <li>
+          <div class="course-dot"></div>
+          <div class="course-name">Latin American History Surveys</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── CURRENT RESEARCH ── -->
+<section class="research" id="research">
+  <div class="section-number reveal">05 &mdash; Current Work</div>
+  <h2 class="section-title reveal">The Fire <span class="accent">Continues</span></h2>
+
+  <div class="research-card reveal">
+    <div class="research-label">Active Research</div>
+    <h3 class="research-title">Fire and Control in Bourbon Mexico</h3>
+    <p class="research-text">
+      Supported by a Newberry Library fellowship, Frederick is investigating how colonial authorities in eighteenth-century Mexico attempted to manage urban fire: the institutional arrangements, the labor regimes, the material infrastructure of prevention and suppression. It is, in a sense, the project his entire career has been building toward. The former firefighter, now deep in the archives, reading how an earlier empire tried to contain what he once fought by hand.
+    </p>
+  </div>
+</section>
+
+<!-- ── ASIDE ── -->
+<div class="aside-block">
+  <div class="aside-inner reveal">
+    <div class="aside-label">Off the Record</div>
+    <p>
+      He is also known to take Halloween "far too seriously," with a commitment to special effects makeup that his colleagues have learned not to question.
+    </p>
+    <p class="aside-footnote">His favorite campus spot remains classified.</p>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-left reveal">
+      <h2>The scholar who followed<br>the fire into the archive.</h2>
+      <p>Two decades at Lawrence. Two monographs. One ongoing question: what happens when systems are tested by crisis.</p>
+    </div>
+    <div class="footer-contact reveal">
+      <a href="mailto:jake.frederick@lawrence.edu">jake.frederick@lawrence.edu</a>
+      <a href="tel:920-832-6678">920-832-6678</a>
+      <div class="location">Main Hall, Room 408<br>Lawrence University, Appleton, WI</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>A tribute, with admiration</span>
+    <span>February 2026</span>
+  </div>
+</footer>
+
+<script>
+// Ember particles
+(function() {
+  const c = document.getElementById('embers');
+  for (let i = 0; i < 15; i++) {
+    const e = document.createElement('div');
+    e.className = 'ember-particle';
+    e.style.left = Math.random() * 100 + '%';
+    e.style.animationDuration = (10 + Math.random() * 14) + 's';
+    e.style.animationDelay = (Math.random() * 12) + 's';
+    e.style.width = e.style.height = (2 + Math.random() * 2) + 'px';
+    c.appendChild(e);
+  }
+})();
+
+// Reveal on scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
